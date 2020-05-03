@@ -1,9 +1,14 @@
 import React from 'react';
+import Showcase from './Showcase';
+import InfoSection from './InfoSection';
+import LandingLogin from './LandingLogin';
 
 const LandingPage = () => {
 	return (
 		<div>
-			<h1>Landing Page</h1>
+			<Showcase />
+			<InfoSection />
+			<LandingLogin />
 		</div>
 	)
 }

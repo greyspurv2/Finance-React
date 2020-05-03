@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Button = props => {
+const LoginButton = props => {
     return (
         <button onClick = { props.onClick }
         style = {
@@ -21,4 +21,4 @@ const Button = props => {
 };
 
 
-export default button;
+export default LoginButton;

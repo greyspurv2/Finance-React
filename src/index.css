@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -28,6 +29,8 @@ code {
   font-size: 40px;
   font-weight: bold;
   color: #17c200;
+  padding: 0;
+  margin: 0;
 }
 .nav-container ul {
   width: 300px;
@@ -41,4 +44,117 @@ code {
   color: #fff;
   text-decoration: none;
   font-size: 20px;
+}
+
+
+
+/* Showcase */
+.showcase-container {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.showcase-container .background-img {
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('./images/stonks.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* filter: blur(4px); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  z-index: -1;
+}
+.showcase-container h1 {
+  color: #fff;
+  font-size: 60px;
+}
+.showcase-container span {
+  color: #17c200;
+}
+
+
+
+/* Info Section */
+.info-section {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #121212;
+}
+.info-section h1 {
+  color: #17c200;
+  font-size: 45px;
+}
+.info-block-section {
+  display: flex;
+  justify-content: space-evenly ;
+  align-items: center;
+  width: 100%;
+}
+.info-block {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  text-align: center;
+  background-color: #444444;
+  padding: 50px;
+  border-radius: 30px;
+}
+.info-block h3 {
+  font-size: 30px;
+  margin: 0;
+  color: #fff;
+}
+.info-block p {
+  color: #fff;
+  font-size: 20px;
+}
+
+
+
+
+/* Landing Login Section */
+.landing-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 50vh;
+  width: 100%;
+  text-align: center;
+  background: #222222;
+}
+.landing-login-container h1 {
+  color: #fff;
+  font-size: 45px;
+}
+.landing-login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #444444;
+  width: 80%;
+  padding: 50px;
+  border-radius: 30px;
+}
+.landing-login-box p {
+  color: #fff;
+  font-size: 20px;
+}
+.landing-login-box button {
+  padding: 10px 40px;
+  font-size: 18px;
+  background-color: #17c200;
+  border: none;
+  border-radius: 50px;
 }
