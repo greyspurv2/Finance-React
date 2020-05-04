@@ -1,3 +1,8 @@
+// Throws error if any uncaught exceptions occur
+process.on('unhandledRejection', err => {
+    throw err;
+});
+
 // Express
 const express = require('express');
 const app = express();
@@ -14,6 +19,21 @@ const chalk = require('chalk');
 
 // MongoDB Agent
 const mongoose = require('mongoose');
+
+
+console.time("Time taken to load the database:");
+mongoose.connect('mongodb+srv://mixedsignals:6d697865647369676e616c73@mixedsignals-s6wpf.mongodb.net/test?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log("Connected to database");
+    console.timeEnd("Time taken to load the database:");
+});
+
 
 // Returns the key synchronously
 function getKey() {
@@ -44,17 +64,55 @@ console.log(chalk.bgBlue.black(`Loaded key: "${AlphaVantageKey}"`));
 // Loads API key
 const alpha = require('alphavantage')({ key: AlphaVantageKey });
 
+// Server will only handle backend, the Webpack Dev Server handles serving the html and scripts
+/*
 // serve static files (for CSS, pictures, etc)
 app.use(express.static(path.join(__dirname, 'public')));
+*/
 
-// Test API
+// Test if API works
 app.get('/helloworld', (req, res) => res.send('Hello World!'));
 
 // Display demo API data
-app.get('/api/data/', (req, res) => {
-    alpha.data.daily(`msft`).then(data => {
-        res.send(alpha.util.polish(data));
-    });
+app.get('/api/stocks/:symbol', (req, res) => {
+    alpha.data.daily(req.params.symbol)
+        .then((data) => alpha.util.polish(data),
+            err => {
+                console.log(toString(err));
+                res.status(404).send(err)
+            })
+        .then((data) => res.status(200).send(data));
+});
+
+app.get('/api/crypto/:symbol', (req, res) => {
+    alpha.data.daily(req.params.symbol)
+        .then((data) => alpha.util.polish(data),
+            err => {
+                console.log(toString(err));
+                res.status(404).send(err)
+            })
+        .then((data) => res.status(200).send(data));
+});
+
+// Testing
+app.get('/users', (req, res) => {
+    return res.send('GET HTTP method on user resource');
+});
+
+app.post('/users', (req, res) => {
+    return res.send('POST HTTP method on user resource');
+});
+
+app.put('/users/:userId', (req, res) => {
+    return res.send(
+        `PUT HTTP method on user/${req.params.userId} resource`,
+    );
+});
+
+app.delete('/users/:userId', (req, res) => {
+    return res.send(
+        `DELETE HTTP method on user/${req.params.userId} resource`,
+    );
 });
 
 // Use host's port, (if we decide to deploy on a service like Heroku) 
