@@ -15,6 +15,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // create routes from our pages
 
+app.get("/home", req, res) => {
+    res.send("")
+}
+
 app.get("/crypto", req, res) => {
     res.send("")
 }
